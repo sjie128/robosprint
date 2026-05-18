@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'game_state_pkg'
+package_name = 'pneumatic_sensor_bot'
 
 setup(
     name=package_name,
@@ -13,14 +13,17 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='indigo128',
-    maintainer_email='indigo128@todo.todo',
-    description='SMACH Main Game State Handler Node for Robosprint Competition',
-    license='Apache-2.0',
-    tests_require=['pytest'],
+    maintainer='indigo128_',
+    maintainer_email='janisagoh128@gmail.com',
+    description='TODO: Package description',
+    license='TODO: License declaration',
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
     entry_points={
         'console_scripts': [
-            'game_manager = game_state_pkg.game_phase:main',
         ],
     },
 )
