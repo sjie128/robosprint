@@ -2,7 +2,7 @@ import time
 import lgpio
 import rclpy.node from Node
 
-class BringUpMechanism:
+class PickPlaceMechanism:
     def __init__(self, logger):
         self.logger = logger
         try:
