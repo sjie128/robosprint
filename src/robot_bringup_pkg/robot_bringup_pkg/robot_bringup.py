@@ -1,6 +1,6 @@
 import time
 import lgpio
-import rclpy.node from Node
+from rclpy.node import Node
 
 class PickPlaceMechanism:
     def __init__(self, logger):
@@ -54,7 +54,7 @@ class PickPlaceMechanism:
             lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 1)
             pivot_180_degree()
             time.sleep(0.5) # reset
-            cube_count -=1
+            self.cube_count -=1
             
         self.cube_count = 0 
         return True
