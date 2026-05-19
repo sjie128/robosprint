@@ -9,6 +9,10 @@ class PickPlaceMechanism:
             self.handle = lgpio.gpiochip_open(1)
             self.CYLINDER_PIN = 18 # pin num
             lgpio.gpio_claim_output(self.handle, self.CYLINDER_PIN)
+            
+            # Set initial default state to 0 (Backward/Retracted)
+            lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 0)
+            
         except Exception as e:
             self.logger.error(f"Failed to initialize GPIO: {e}")
             
@@ -19,10 +23,16 @@ class PickPlaceMechanism:
         if success:
             if cube_detection:
                 self.logger.info("real cube. pick up")
-                time.sleep(0.5)  # cylinder extend
-                lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 0)
-                pivot_180_degree()
+                time.sleep(0.5)  
+                
+                # CHANGED: 1 now moves it Forward (Extend)
                 lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 1)
+                
+                pivot_180_degree()
+                
+                # CHANGED: 0 now moves it Backward (Retract)
+                lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 0)
+                
                 time.sleep(0.3)  # reset
                 pivot_180_degree()
                 self.cube_count += 1
@@ -49,9 +59,15 @@ class PickPlaceMechanism:
         for i in range(self.cube_count):
             self.logger.info(f"Releasing cube {i}...")
             pivot_180_degree()
-            lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 0)
-            time.sleep(0.8) # Extend
+            
+            # CHANGED: 1 now moves it Forward (Extend) to release
             lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 1)
+            
+            time.sleep(0.8) # Extend
+            
+            # CHANGED: 0 now moves it Backward (Retract) back safely
+            lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 0)
+            
             pivot_180_degree()
             time.sleep(0.5) # reset
             self.cube_count -=1

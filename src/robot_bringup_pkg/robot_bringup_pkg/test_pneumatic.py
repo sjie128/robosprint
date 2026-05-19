@@ -29,7 +29,7 @@ class PickPlaceMechanism:
         """Logic for picking cubes at black junctions."""
         if success:
             if cube_detection:
-                self.logger.info("🟢 REAL CUBE DETECTED! Starting pickup loop...")
+                self.logger.info("REAL CUBE DETECTED! Starting pickup loop...")
                 
                 # Turn relay ON (fires pneumatic)
                 lgpio.gpio_write(self.handle, self.CYLINDER_PIN, 0)

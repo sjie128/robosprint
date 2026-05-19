@@ -4,7 +4,7 @@ from geometry_msgs.msg import Twist
 import spidev
 import time
 import smach
-from decision_pkg.pick_place import PickPlaceMechanism
+from cubeDetection_pkg.pick_place import cubeDetection
 
 KP = 0.002
 KI = 0.0001
