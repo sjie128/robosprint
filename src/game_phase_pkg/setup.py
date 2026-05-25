@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'vision'
+package_name = 'game_phase_pkg'
 
 setup(
     name=package_name,
@@ -24,7 +24,6 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'vision = vision.junction_detector:main'
         ],
     },
 )
